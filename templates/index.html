@@ -1,0 +1,50 @@
+{% include "header.html" %}
+
+    <!-- Post -->
+    {% for cafe in all_cafes %}
+        <div class="col-md-6 mx-auto">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-3 d-flex flex-column position-static">
+                    <h2 class="mb-0">{{ cafe.name }}</h2>
+                <a href="{{ cafe.map_url }}" class="col-auto d-none d-lg-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Go to maps..." style="text-decoration: none;">
+                    <h4 class="mb-2" style="font-weight: normal;">{{ cafe.location }}</h4>
+                </a>
+
+                <b class="card-text mb-auto"><small class="text-muted">Coffee Price: </small>{{ cafe.coffee_price }}</b>
+                <b class="card-text mb-auto"><small class="text-muted">Charging Sockets: </small>
+                        {% if cafe.has_sockets == True %}
+                            <img src="static/assets/images/icons8-tick.svg" width="30" height="30">
+                        {% else %}
+                            <img src="static/assets/images/icons8-cross.svg" width="26" height="26">
+                        {% endif %}</b>
+                    <b class="card-text mb-auto"><small class="text-muted">Toilet: </small>
+                        {% if cafe.has_toilet == True %}
+                            <img src="static/assets/images/icons8-tick.svg" width="30" height="30">
+                        {% else %}
+                            <img src="static/assets/images/icons8-cross.svg" width="26" height="26">
+                        {% endif %}</b>
+                    <b class="card-text mb-auto"><small class="text-muted">Wi-Fi: </small>
+                        {% if cafe.has_wifi == True %}
+                            <img src="static/assets/images/icons8-tick.svg" width="30" height="30">
+                        {% else %}
+                            <img src="static/assets/images/icons8-cross.svg" width="26" height="26">
+                        {% endif %}</b>
+                    <b class="card-text mb-auto"><small class="text-muted">Can Take Calls: </small>
+                        {% if cafe.can_take_calls == True %}
+                            <img src="static/assets/images/icons8-tick.svg" width="30" height="30">
+                        {% else %}
+                            <img src="static/assets/images/icons8-cross.svg" width="26" height="26">
+                        {% endif %}</b>
+                    <b class="card-text mb-auto"><small class="text-muted">Seats:</small> {{ cafe.seats }}</b>
+                    <div class="btn-group mx-5 mt-4">
+                        <a href="{{ url_for('edit_cafe', cafe_id=cafe.id) }}" type="button" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <a href="{{ url_for('delete_cafe', cafe_id=cafe.id) }}" type="button" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </div>
+                </div>
+                    <a href="{{ cafe.map_url }}" class="col-auto d-none d-lg-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Go to maps...">
+                        <img src="{{ cafe.img_url }}" width="370" height="370" role="img" style="object-fit: cover;">
+                    </a>
+            </div>
+        </div>
+    {% endfor %}
+{% include "footer.html" %}
